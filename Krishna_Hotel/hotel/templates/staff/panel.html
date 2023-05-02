@@ -1,0 +1,407 @@
+{% extends 'basic.html' %} {% block title %} staff panel {% endblock title %} {% block css %}
+<style>
+    .progress {
+        width: 150px;
+        height: 150px;
+        background: none;
+        position: relative;
+    }
+    
+    .progress::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 6px solid #eee;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    .progress>span {
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        z-index: 1;
+    }
+    
+    .progress .progress-left {
+        left: 0;
+    }
+    
+    .progress .progress-bar {
+        width: 100%;
+        height: 100%;
+        background: none;
+        border-width: 6px;
+        border-style: solid;
+        position: absolute;
+        top: 0;
+    }
+    
+    .progress .progress-left .progress-bar {
+        left: 100%;
+        border-top-right-radius: 80px;
+        border-bottom-right-radius: 80px;
+        border-left: 0;
+        -webkit-transform-origin: center left;
+        transform-origin: center left;
+    }
+    
+    .progress .progress-right {
+        right: 0;
+    }
+    
+    .progress .progress-right .progress-bar {
+        left: -100%;
+        border-top-left-radius: 80px;
+        border-bottom-left-radius: 80px;
+        border-right: 0;
+        -webkit-transform-origin: center right;
+        transform-origin: center right;
+    }
+    
+    .progress .progress-value {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    /*
+*
+* ==========================================
+* FOR DEMO PURPOSE
+* ==========================================
+*
+*/
+    
+    body {
+        min-height: 100vh;
+    }
+    
+    .rounded-lg {
+        border-radius: 1rem;
+    }
+    
+    .text-gray {
+        color: #aaa;
+    }
+    
+    div.h4 {
+        line-height: 1rem;
+    }
+</style>
+{% endblock css %} {% block body %}
+<!--Staff section -->
+
+<!--Room Stats section starts here-->
+
+
+<section class="my-5 ">
+    {%load app_tags%}
+    <h2 class="text-center text-primary">Room Stats</h2>
+    <div class="container-fluid px-5 py-5 border">
+        <div class="row">
+
+
+
+            <div class="col-xl-3 col-lg-6 col-sm-12 mb-4 ">
+                <div class="bg-white rounded-lg p-5 shadow">
+                    <h2 class="h6 font-weight-bold text-center mb-4">Total Rooms</h2>
+
+                    <!-- Progress bar 1 -->
+
+                    <div class="progress mx-auto" data-value={{ total_rooms|percentage:total_rooms}}>
+                        <span class="progress-left">
+                                    <span class="progress-bar border-primary"></span>
+                        </span>
+                        <span class="progress-right">
+                                    <span class="progress-bar border-primary"></span>
+                        </span>
+                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="h2 font-weight-bold">{{ total_rooms}}</div>
+                        </div>
+                    </div>
+                    <!-- END -->
+
+
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 col-sm-12 mb-4">
+                <div class="bg-white rounded-lg p-5 shadow">
+                    <h2 class="h6 font-weight-bold text-center mb-4">Available Rooms</h2>
+
+                    <!-- Progress bar 2 -->
+                    <div class="progress mx-auto" data-value={{ available|percentage:total_rooms}}>
+                        <span class="progress-left">
+                                    <span class="progress-bar border-success"></span>
+                        </span>
+                        <span class="progress-right">
+                                    <span class="progress-bar border-success"></span>
+                        </span>
+                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="h2 font-weight-bold">{{ available}}</div>
+                        </div>
+                    </div>
+                    <!-- END -->
+
+
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 col-sm-12 mb-4">
+                <div class="bg-white rounded-lg p-5 shadow">
+                    <h2 class="h6 font-weight-bold text-center mb-4">Not Available</h2>
+
+                    <!-- Progress bar 3 -->
+                    <div class="progress mx-auto" data-value={{ unavailable|percentage:total_rooms}}>
+                        <span class="progress-left">
+                                    <span class="progress-bar border-danger"></span>
+                        </span>
+                        <span class="progress-right">
+                                    <span class="progress-bar border-danger"></span>
+                        </span>
+                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="h2 font-weight-bold">{{ unavailable}}</div>
+                        </div>
+                    </div>
+                    <!-- END -->
+
+
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 col-sm-12 mb-4">
+                <div class="bg-white rounded-lg p-5 shadow">
+                    <h2 class="h6 font-weight-bold text-center mb-4">Total Reservation</h2>
+
+                    <!-- Progress bar 4 -->
+                    <div class="progress mx-auto" data-value={{reserved |percentage:total_rooms}}>
+                        <span class="progress-left">
+                                    <span class="progress-bar border-warning"></span>
+                        </span>
+                        <span class="progress-right">
+                                    <span class="progress-bar border-warning"></span>
+                        </span>
+                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="h2 font-weight-bold">{{reserved}}</div>
+                        </div>
+                    </div>
+                    <!-- END -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Room Stats section ends here-->
+
+
+<h2 class="text-center pb-2">Rooms Details</h2>
+
+<Button class="btn-group btn-primary" data-toggle="modal" data-target="#newroom">Add New Room</Button>
+
+
+<Button class="btn-group btn-primary " data-toggle="modal" data-target="#newlocation">Add New Location</Button>
+
+<table class="table table-striped  ">
+    <thead>
+        <th>Room Number</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Price</th>
+        <th>Capacity</th>
+        <th>Size</th>
+        <th colspan="2">Actions</th>
+
+    </thead>
+    {% if rooms %} {% for each_room in rooms %}
+    <tr>
+        <td>{{each_room.roomnumber}}</td>
+        <td>{{each_room.get_room_type_display}}</td>
+        <td>{{each_room.get_status_display}}</td>
+        <td>{{each_room.price}}</td>
+        <td>{{each_room.capacity}}</td>
+        <td>{{each_room.size}}</td>
+        <td colspan="2">
+            <a href="/staff/panel/edit-room?roomid={{each_room.id}}"><Button class="btn btn-danger">Edit</Button></a>
+            <a href="/staff/panel/view-room?roomid={{each_room.id}}"><Button class="btn btn-primary">View</Button></a>
+        </td>
+
+
+    </tr>
+    {% endfor %} {% endif %}
+
+
+</table>
+<!---->
+
+<!--Modal for Add New Location starts from here-->
+
+<!-- The Modal -->
+<div class="modal" id="newlocation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Location</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col mx-auto">
+
+                            <form action="/staff/panel/add-new-location" method="POST">
+                                {% csrf_token %}
+
+
+                                <div class="form-group">
+                                    <label for="Owner">Owner:</label>
+                                    <input type="text" class="form-control " id="new_owner" name="new_owner">
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City:</label>
+                                    <input type="text" class="form-control " id="new_city" name="new_city">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">State:</label>
+                                    <input type="text" class="form-control " id="new_state" name="new_state">
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Country:</label>
+                                    <input type="text" class="form-control " id="new_country" name="new_country">
+                                </div>
+
+
+                                <button type="submit" class="btn btn-primary">Add Location</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<!--Modal for Add New location Ends here-->
+
+<!--Modal for Add New Room starts from here-->
+
+<!-- The Modal -->
+<div class="modal" id="newroom">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Room</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col mx-auto">
+
+                            <form action="/staff/panel/add-new-room" method="POST">
+                                {% csrf_token %}
+
+                                <div class="form-group">
+                                    <label for="email">Room Type:</label>
+                                    <select class="form-control" name="roomtype" id="roomtype">
+                                        
+                                        <option value="1">Premium</option>
+                                        <option value="2">Deluxe</option>
+                                        <option value="3">Basic</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">Capacity:</label>
+                                    <input type="number" class="form-control " id="capacity" name="capacity">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">Price:</label>
+                                    <input type="mumber" class="form-control " id="price" name="price">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">Size:</label>
+                                    <input type="number" class="form-control " id="size" name="size">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">Status:</label>
+                                    <select class="form-control" name="status" id="roomstatus">
+                                        
+                                        <option value="1">Available</option>
+                                        <option value="2">Not Available</option>
+                                        
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">Location:</label>
+
+                                    <select class="form-control" name="hotel" id="hotel">
+                                        {% for each_location,eachid in location%}
+                                        <option value={{eachid}}>{{each_location}}</option>
+                                        {% endfor %}
+                                        
+                                        
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add Room</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<!--Modal for Add New Room Ends here-->
+
+{% endblock body %} {% block js %}
+<!-- jquery for rooms stats  starts here-->
+<script>
+    $(function() {
+
+        $(".progress").each(function() {
+
+            var value = $(this).attr('data-value');
+            var left = $(this).find('.progress-left .progress-bar');
+            var right = $(this).find('.progress-right .progress-bar');
+
+            if (value > 0) {
+                if (value <= 50) {
+                    right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
+                } else {
+                    right.css('transform', 'rotate(180deg)')
+                    left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
+                }
+            }
+
+        })
+
+        function percentageToDegrees(percentage) {
+
+            return percentage / 100 * 360
+
+        }
+
+    });
+</script>
+<!--Jquery for room stats ends here-->
+{% endblock js %}

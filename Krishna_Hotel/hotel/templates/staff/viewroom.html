@@ -1,0 +1,40 @@
+ {% extends 'basic.html' %} {% block title %}View Room {% endblock title %} {% block body %}
+<h3 class="text-success"> Details</h3>
+<hr>
+<div class="container mx-0 ">
+    <p><b>Number :-</b> {{room.roomnumber}}</p>
+    <p><b>Type :-</b> {{room.get_room_type_display}}</p>
+    <p><b>Capacity :-</b> {{room.capacity}} person</p>
+    <p><b>Size :-</b> {{room.size}} ft</p>
+    <p><b>Status :-</b> {{room.get_status_display| capfirst}} </p>
+    <p><b>City :-</b> {{room.hotel.location| capfirst}} </p>
+    <p><b>State :-</b> {{room.hotel.state| capfirst}} </p>
+    <p><b>India :-</b> {{room.hotel.country| capfirst}} </p>
+</div>
+
+
+<hr> {% if reservations %}
+<h3 class="text-success">Bookings :-</h3>
+<table class="table">
+    <thead>
+        <th>Username</th>
+        <th>Person</th>
+        <th>check in</th>
+        <th>check out</th>
+    </thead>
+    {% for each_detail in reservations %}
+    <tr>
+        <td>{{each_detail.guest.username}}</td>
+        <td>{{each_detail.room.capacity}}</td>
+        <td>{{each_detail.check_in}}</td>
+        <td>{{each_detail.check_out}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td><b>Total bookings = </b>{{reservations | length}}</td>
+    </tr>
+
+</table>
+{% else %}
+<p>No details found</p>
+{% endif %} {% endblock body %}

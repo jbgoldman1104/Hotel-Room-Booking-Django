@@ -1,0 +1,30 @@
+{% extends 'basic.html' %}
+{% block title %}All Bookings
+{% endblock title %}
+{% block body %}
+<h3 class="text-center  text-success">All Bookings </h3>
+<table class="table">
+    <thead>
+        <th>User</th>
+        <th>Room</th>
+        <th>Location</th>
+        <th>Person</th>
+        <th>Check in</th>
+        <th>Check out</th>
+        <th>Price</th>
+    </thead>
+    {% for each_booking in bookings %}
+    <tr>
+        <td>{{each_booking.guest.username}}</td>
+        <td>{{each_booking.room.roomnumber}}</td>
+        <td>{{each_booking.room.hotel.location}}</td>
+        <td>{{each_booking.room.capacity}}</td>
+        <td>{{each_booking.check_in}}</td>
+        <td>{{each_booking.check_out}}</td>
+        <td>{{each_booking.room.price}}</td>
+    </tr>
+    {% endfor %}
+
+
+</table>
+{% endblock body %}

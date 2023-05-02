@@ -1,0 +1,157 @@
+{% extends 'basic.html' %}
+{% block title %}Add Room
+{% endblock title %}
+{% block css %}
+ <style>
+        .progress {
+            width: 150px;
+            height: 150px;
+            background: none;
+            position: relative;
+        }
+        
+        .progress::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 6px solid #eee;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .progress>span {
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+        }
+        
+        .progress .progress-left {
+            left: 0;
+        }
+        
+        .progress .progress-bar {
+            width: 100%;
+            height: 100%;
+            background: none;
+            border-width: 6px;
+            border-style: solid;
+            position: absolute;
+            top: 0;
+        }
+        
+        .progress .progress-left .progress-bar {
+            left: 100%;
+            border-top-right-radius: 80px;
+            border-bottom-right-radius: 80px;
+            border-left: 0;
+            -webkit-transform-origin: center left;
+            transform-origin: center left;
+        }
+        
+        .progress .progress-right {
+            right: 0;
+        }
+        
+        .progress .progress-right .progress-bar {
+            left: -100%;
+            border-top-left-radius: 80px;
+            border-bottom-left-radius: 80px;
+            border-right: 0;
+            -webkit-transform-origin: center right;
+            transform-origin: center right;
+        }
+        
+        .progress .progress-value {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        
+        body {
+            min-height: 100vh;
+        }
+        
+        .rounded-lg {
+            border-radius: 1rem;
+        }
+        
+        .text-gray {
+            color: #aaa;
+        }
+        
+        div.h4 {
+            line-height: 1rem;
+        }
+    </style>
+{% endblock css %}
+{% block body %}
+ <h1 class="text-center bg-warning my-0">Add Room</h1>
+    <!--Staff section -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6 col-lg-6 col-xlg-6 col-sm-12 mx-auto">
+
+                <form action="/staff/panel/add-room/add" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="email">Room Type:</label>
+                        <select class="form-control" name="roomtype" id="roomtype">
+                            
+                            <option value="1">Premium</option>
+                            <option value="2">Deluxe</option>
+                            <option value="3">Basic</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Capacity:</label>
+                        <input type="number" class="form-control " id="capacity" name="capacity">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Price:</label>
+                        <input type="mumber" class="form-control " id="price" name="price">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Size:</label>
+                        <input type="number" class="form-control " id="size" name="size">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Status:</label>
+                        <select class="form-control" name="status" id="roomstatus">
+                            
+                            <option value="1">Available</option>
+                            <option value="2">Not Available</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Location:</label>
+                        
+                        <select class="form-control" name="hotel" id="hotel">
+                            {% for each_location,eachid in location%}
+                            <option value={{eachid}}>{{each_location}}</option>
+                            {% endfor %}
+                            
+                            
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Room</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+   
+
+
+
+
+
+

@@ -1,0 +1,103 @@
+{% extends 'basic.html' %}
+{% block title %}staff
+{% endblock title %}
+{% block body %}
+<!--Cards starts here-->
+    <div class="container py-5">
+        <!--login and signup tab starts here -->
+        <section>
+            <div class="card w-50 mx-auto">
+                <div class="card-title bg-light ">
+                    <div class="container mt-3 mx-auto">
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs justify-content-center w-100 " style="width:358px">
+
+                            <li class="nav-item">
+                                <a class="nav-link active " data-toggle="tab" href="#home" style="width:158px">Login</a>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu1" style="width:158px">Signup</a>
+                            </li>
+
+                    </div>
+                </div>
+
+
+                </ul>
+                <div class="card-body">
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div id="home" class="container tab-pane active">
+                            <p class="text-center text-dark">Staff login form</p>
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-xlg-12">
+
+                                        <form action="/staff/login" method="post">
+                                            {%csrf_token%}
+                                            <div class="form-group">
+                                                <label for="email">username:</label>
+                                                <input type="text" class="form-control " id="username" placeholder="username" name="username">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="pwd">Password:</label>
+                                                <input type="password" class="form-control " id="password" placeholder="password" name="password">
+                                            </div>
+                                            <div class="form-group form-check">
+                                                <label class="form-check-label">
+                                                        <input class="form-check-input " type="checkbox"
+                                                            name="remember">
+                                                        Remember me
+                                                    </label>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Login</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="menu1" class="container tab-pane fade">
+                            <p class="text-center text-dark">Staff Signup form</p>
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-xlg-12">
+
+                                        <form action="/staff/signup" method="POST">
+                                            {%csrf_token%}
+                                            <div class="form-group">
+                                                <label for="username">Username:</label>
+                                                <input type="text" class="form-control " id="username" placeholder="Username" name="username">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password1">Password:</label>
+                                                <input type="password" class="form-control " id="password1" placeholder="password" name="password1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password2">Confirm Password:</label>
+                                                <input type="password" class="form-control " id="password2" placeholder="Confirm Password" name="password2">
+                                            </div>
+
+
+                                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+        </section>
+        <!--Login and logout tab ends here-->
+    </div>
+{% endblock body %}
+    
+   
